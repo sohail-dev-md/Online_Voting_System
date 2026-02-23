@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ovs: {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <section>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <nav class="navbar">
+            <div class="containerf" id="container">
+            <div class="container-fluid">
+                    <button class="phone-menu-toggler" id="phone-menu-toggler" title="Menu">
+                        <span class="phone-menu-toggler-icon">
+                            <div class="menu-button" id="menuButton">
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <!-- copy symbol = ❑ -->
+                            </div>
+                        </span>
+                    </button>
+                    <a class="navbar-brand" href="/" title="Home">
+                        <div class="logo">
+                            <img id="logoImg" src="/static/uploads/logo.jpg" alt="logo">
+                    </div>
+                </a>
+                <div class="navbar-collapse" id="navbar">
+                    <ul class="navbar-nav me-auto mt-2" id="nav-left">
+                        <li class="nav-item" title="Info"><a class="nav-link" href="/info">Info</a></li>
+                        <li class="nav-item" title="History"><a class="nav-link" href="/">History</a></li>
+                        <li class="nav-item" title="Quote"><a class="nav-link" href="/">Quote</a></li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto mt-2" id="nav-right">
+                        {% if session["user_id"] %}
+                        <div class="pic">
+                            <img class="profile-Picture" id="profilepic" src="/static/uploads/7.png" alt="Profile Image">
+                        </div>
+                        <li class="nav-item" title="Show Profile Card">
+                            <a class="nav-link" id="toggleProfileCard" href="">
+                                <span class="username">
+                                    {{ info.Username }}
+                                    <span class="arrow">⇩</span><!-- &#x2A54;  -->
+                                </span>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item" title="Register"><a class="nav-link" href="/register">Register</a></li>
+                        <li class="nav-item" title="Log In"><a class="nav-link" href="/login">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="resize-handle resize-handle-horizontal"></div>
+                <div class="resize-handle resize-handle-vertical"></div>
+
+            </div>
+        </nav>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" role="alert">
+                        <!-- <span class="close-alert">&times; </span> -->
+                        <span class="close-alert"><img src="/static/uploads/cross.png" alt="&times; "></span>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+
+        <!-- profile card -->
+        {% if session["user_id"] %}
+            <div class="profile-card" id="profileCard" style="display: none;">
+                <div class="card-header">
+                    <div id="editButton" title="Edit Profile">
+                        <div class="dot" style="color: white;"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <img src="/static/uploads/dots.png" alt="&times; " style="height: 37px; margin-left:90%;">
+                    </div>
+                </div>
+
+                <div id="profile-pic" title="Profile Image">
+                    <img class="profile-Picture" id="profileImage" src="/static/uploads/7.png" alt="Profile Image">
+                </div>
+
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <input type="file" id="fileInput" name="file" accept="image/*" hidden>
+                    <div id="uploadimg">
+                        <label for="fileInput" title="Click to change profile image">
+                            <img id="Upload-button" src="/static/uploads/edit-button.png"> <!-- ----------------------------------------------- -->
+                        </label>
+                    </div>
+                </form>
+
+                <div id="infoFields">
+
+                    <div class="inputbox">
+                        Id: {{ session['user_id'] }}
+                    </div>
+
+                    <div class="inputbox">
+                        Username:
+                        <input type="text" title="Username" id="username" name="username" spellcheck="false" autocomplete="off" value="{{ info.Username }}" readonly>
+                    </div>
+
+                    <div class="inputbox">
+                        Email:
+                        <input type="text" title="Email" id="Email" name="email" spellcheck="false" autocomplete="off" autofocus value="{{ info.Email }}" readonly>
+                    </div>
+
+                    <div class="inputbox">
+                        Age: {{ info.Age }}
+                    </div>
+
+                    <div class="inputbox">
+                        Elections Hosted: {{ info.Elections_Hosted }}
+                    </div>
+
+                    <div class="inputbox">
+                        Elections Participated In: {{ info.Elections_Participated_In }}
+                    </div>
+                </div>
+
+                <form action="/change_password">
+                    <div class="inputboxs">
+                        <input type="submit" title="Change Password" value="Change Password">
+                    </div>
+                </form>
+
+                <form action="/logout">
+                    <div class="inputboxs">
+                        <input type="submit" title="Log Out" value="Log Out">
+                    </div>
+                </form>
+
+                <div class="inputboxs">
+                    <input type="submit" title="Submit Changes" value="Submit" hidden>
+                </div>
+
+            </div>
+        {% endif %}
+
+        <div class="phone-menu" id="phone-menu">
+            <ul class="phone-menu-nav">
+                {% if session["user_id"] %}
+                    <li class="nav-item" title="Quote"><a class="nav-link" href="/">Quote</a></li>
+                    <li class="nav-item" title="History"><a class="nav-link" href="/">History</a></li>
+                    <li class="nav-item" title="Info"><a class="nav-link" href="/info">Info</a></li>
+                    <li class="nav-item" title="Change Password"><a class="nav-link" href="/change_password">Change Password</a></li>
+                    <li class="nav-item" title="Log Out"><a class="nav-link" href="/logout">Log Out</a></li>
+                    <li class="nav-item" title="Show Profile Card"><a class="nav-link" id="toggleProfileCardMobile" href="#">Show Profile</a></li>
+                {% else %}
+                    <li class="nav-item" title="Register"><a class="nav-link" href="/register">Register</a></li>
+                    <li class="nav-item" title="Log In"><a class="nav-link" href="/login">Log In</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+        {% if session["user_id"] %}
+            <div class="profile-pic-fullsize" style="display: none;">
+                <img class="profile-Picture" id="profileImagefullsize" src="/static/uploads/7.png" alt="Profile Image">
+            </div>
+        {% endif %}
+
+
+
+        <main>
+            {% block main %}{% endblock %}
+        </main>
+
+    </section>
+    <script src="/static/nav.js"></script>
+    <script>
+        const container = document.getElementById('container');
+        const horizontalHandle = document.querySelector('.resize-handle-horizontal');
+        const verticalHandle = document.querySelector('.resize-handle-vertical');
+
+        let isResizingHorizontal = false;
+        let isResizingVertical = false;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var closeButtons = document.querySelectorAll('.close-alert');
+            closeButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    this.closest('.alert').style.display = 'none';
+                });
+            });
+        });
+
+        // Horizontal resize handle
+        horizontalHandle.addEventListener('mousedown', (e) => {
+        isResizingHorizontal = true;
+        document.addEventListener('mousemove', horizontalResize);
+        document.addEventListener('mouseup', stopHorizontalResize);
+        });
+
+        // Vertical resize handle
+        verticalHandle.addEventListener('mousedown', (e) => {
+        isResizingVertical = true;
+        document.addEventListener('mousemove', verticalResize);
+        document.addEventListener('mouseup', stopVerticalResize);
+        });
+
+        function horizontalResize(e) {
+        if (isResizingHorizontal) {
+            const newWidth = e.clientX - container.getBoundingClientRect().left;
+            container.style.width = newWidth + 'px';
+        }
+        }
+
+        function verticalResize(e) {
+        if (isResizingVertical) {
+            const newHeight = e.clientY - container.getBoundingClientRect().top;
+            container.style.height = newHeight + 'px';
+        }
+        }
+
+        function stopHorizontalResize() {
+        isResizingHorizontal = false;
+        document.removeEventListener('mousemove', horizontalResize);
+        }
+
+        function stopVerticalResize() {
+        isResizingVertical = false;
+        document.removeEventListener('mousemove', verticalResize);
+        }
+    </script>
+</body>
+</html>

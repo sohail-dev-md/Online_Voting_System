@@ -1,0 +1,50 @@
+{% extends "nav.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <div class="box">
+        <div class="container">
+            <div class="form">
+                <h1>Register</h1>
+                <form id="registration" action="/register" method="post">
+
+                    <div class="inputbox">
+                        <input type="text" title="Username" id="username" name="username" spellcheck="false" autofocus autocomplete="off" required>
+                        <label for="username" class="form-label">Username</label>
+                    </div>
+
+                    <div class="inputbox">
+                        <input type="email" title="Email" id="Email" name="email" autocomplete="off" required>
+                        <label for="Email" class="form-label">Email</label>
+                    </div>
+
+                    <div class="inputbox">
+                        <input type="number" title="Age" id="age" name="age" autocomplete="off" required>
+                        <label for="age" class="form-label">Age</label>
+                    </div>
+
+                    <div class="inputbox">
+                        <input type="password" title="Password" id="password" name="password" spellcheck="false" autocomplete="off" required>
+                        <label for="password" class="form-label">password</label>
+                    </div>
+
+                    <div class="inputbox">
+                        <input type="password" title="Conformation Password" id="confirmation" name="confirmation" spellcheck="false" autocomplete="off" required>
+                        <label for="cpassword" class="form-label">conform password</label>
+                    </div>
+
+                    <div class="inputbox">
+                        <input type="submit" title="verify email" value="Verify">
+                    </div>
+
+                    <p class="forgot"><a href="/login">Already have an account ?</a></p>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

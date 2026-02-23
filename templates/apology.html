@@ -1,0 +1,20 @@
+{% extends "nav.html" %}
+
+{% block title %}
+    Apology
+{% endblock %}
+
+{% block main %}
+    <!-- https://memegen.link/ -->
+    <!-- https://knowyourmeme.com/memes/grumpy-cat -->
+    <div class="box">
+        <div class="container" style="width: 400px; overflow: hidden;">
+            <img alt="{{ top }}" class="border img-fluid" src="https://api.memegen.link/images/custom/{{ top | urlencode }}/{{ bottom | urlencode }}.jpg?background=https://i.imgur.com/CsCgN7Ll.png&width=400" title="{{ top }}">
+        </div>
+    </div>
+    <div class="box">
+        <div class="container" style="min-height: 35px; width: auto; padding: 2px;">
+            <h2><a style="color: white; padding: 10px; padding-left: 0;" href='/'>Return to Login?</a></h2>
+        </div>
+    </div>
+{% endblock %}
