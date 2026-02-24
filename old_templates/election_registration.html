@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "nav.html" %}
 
 {% block title %}
     Register Election
@@ -64,23 +64,64 @@
 
                     <!-- Voting System Type -->
                     <h2>Voting System Type</h2>
+                    <div class="toggle-container">
+                        <label for="basic-toggle">Basic</label>
+                        <input type="checkbox" id="basic-toggle" name="basic-toggle" hidden>
+                        <label for="basic-toggle" class="toggle-label"></label>
+                        <label for="basic-toggle">Advanced</label>
+                    </div>
 
                     <!-- Basic Voting System Dropdown -->
-                    <div id="basic-selection" class="Select">
-                        <div class="option-selected">Select Voting System</div>
+                    <div id="basic-selection" class="Select" style="display:block;">
+                        <div class="option-selected">Select Basic Voting System</div>
                         <div class="options">
-                            <div data-value="approval">Approval Voting</div>
                             <div data-value="plurality">Plurality Voting</div>
-                            <div data-value="condorcet">Ranked-Choice Voting</div>
-                            <div data-value="borda_count">Plurality Voting</div>
-                            <div data-value="range_voting">Plurality Voting</div>
+                            <div data-value="approval">Approval Voting</div>
                             <div data-value="ranked-choice">Ranked-Choice Voting</div>
-                            <div data-value="straight_ticket">Ranked-Choice Voting</div>
-                            <div data-value="quadratic_voting">Approval Voting</div>
+                            <div data-value="plurality">Plurality Voting</div>
+                            <div data-value="approval">Approval Voting</div>
+                            <div data-value="ranked-choice">Ranked-Choice Voting</div>
+                            <div data-value="plurality">Plurality Voting</div>
+                            <div data-value="approval">Approval Voting</div>
+                            <div data-value="ranked-choice">Ranked-Choice Voting</div>
                         </div>
                     </div>
 
-                    <div class="inputBox">
+                    <!-- Advanced Voting System Dropdown -->
+                    <div id="advanced-selection" class="Select" style="display:none;">
+                        <div class="option-selected">Select Advanced Voting System</div>
+                        <div class="options">
+                            <div data-value="borda-count">Borda Count</div>
+                            <div data-value="quadratic-voting">Quadratic Voting</div>
+                            <div data-value="condorcet-method">Condorcet Method</div>
+                            <div data-value="range-voting">Range Voting</div>
+                            <div data-value="borda-count">Borda Count</div>
+                            <div data-value="quadratic-voting">Quadratic Voting</div>
+                            <div data-value="condorcet-method">Condorcet Method</div>
+                            <div data-value="range-voting">Range Voting</div>
+                            <div data-value="borda-count">Borda Count</div>
+                            <div data-value="quadratic-voting">Quadratic Voting</div>
+                            <div data-value="condorcet-method">Condorcet Method</div>
+                            <div data-value="range-voting">Range Voting</div>
+                        </div>
+                    </div>
+
+                    <div class="inputbox">
+                        <input type="password" id="password" name="password" spellcheck="false" autofocus autocomplete="off" required>
+                        <label for="opassword" class="form-label">password</label>
+                    </div>
+
+                    <div class="inputbox">
+                        <input type="password" id="new_password" name="new_password" spellcheck="false" autocomplete="off" required>
+                        <label for="password" class="form-label">new password</label>
+                    </div>
+
+                    <div class="inputbox">
+                        <input type="password" id="confirmation" name="confirmation" spellcheck="false" autocomplete="off" required>
+                        <label for="cpassword" class="form-label">conform password</label>
+                    </div>
+
+                    <div class="inputbox">
                         <input type="submit" value="Register">
                     </div>
                 </form>

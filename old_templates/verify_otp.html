@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "nav.html" %}
 
 {% block title %}
     Register
@@ -10,11 +10,11 @@
             <div class="form">
                 <h2>To Verify Your Email</h2>
                 <form action = "/verify-otp" method="post">
-                    <div class="inputBox">
+                    <div class="inputbox">
                         <input type = "number" name = "otp" title="otp" id="otp" autofocus autocomplete="off" required>
                         <label for="otp" class="form-label">Enter OTP: </label>
                     </div>
-                    <div class="inputBox">
+                    <div class="inputbox">
                         <input type="submit" value="submit">
                     </div>
                 </form>

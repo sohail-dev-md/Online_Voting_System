@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "nav.html" %}
 
 {% block title %}
     Log In
@@ -10,17 +10,17 @@
             <div class="form">
                 <h2>Login</h2>
                 <form action="/login" method="post">
-                    <div class="inputBox">
+                    <div class="inputbox">
                         <input type="text" title="Username" id="username" name="username" spellcheck="false" autofocus autocomplete="off" required>
                         <label for="username" class="form-label">Username / Email</label>
                     </div>
 
-                    <div class="inputBox">
+                    <div class="inputbox">
                         <input type="password" title="Password" id="password" name="password" spellcheck="false" autocomplete="off" required>
                         <label for="password" class="form-label">password</label>
                     </div>
 
-                    <div class="inputBox">
+                    <div class="inputbox">
                         <input type="submit" id="submitButton" title="Login" value="Login">
                     </div>
                     <p class="forgot"><a href="/forgot_password">Forgot password ?</a></p>

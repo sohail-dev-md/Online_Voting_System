@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block main %}
+    <form action="/search" method="post">
+        <form action="/search" method="post" class="search_form">
+            <div class="search_field">
+                <div class="search_wrapper">
+                    <input
+                        type="search"
+                        id="search"
+                        name="search"
+                        placeholder="Search"
+                        spellcheck="false"
+                        autocomplete="off"
+                    />
+                </div>
+                <button type="submit" class="search_button" aria-label="Search">
+                    🔍
+                </button>
+            </div>
+        </form>
+    </form>
+    <!-- this creates election cards -->
+    {% if election_info %}
+        <h1>Searched Elections</h1>
+        {% for election in election_info %}
+            <div class="election-cards-container">
+                <div
+                    class="election-card"
+                    onclick="window.location.href='/host_election/{{ election.election_key }}'" >
+                    <div class="election-card-header">
+                        <h3 class="election-title">{{ election.title }}</h3>
+                        {% if election.is_active %}
+                            <span class="election-status active">Active</span>
+                        {% else %}
+                            <span class="election-status inactive">Inactive</span>
+                        {% endif %}
+                    </div>
+
+                    <p class="election-explanation">
+                        {{ election.explanation }}
+                    </p>
+                    <div class="election-details">
+                        <p>
+                            <strong>Type:</strong>
+                            <span class="election-type">{{ election.type_of_election }}</span>
+                        </p>
+                        <p>
+                            <strong>Visibility:</strong>
+                            <span class="election-visibility">{{ election.visibility }}</span>
+                        </p>
+                    </div>
+
+                    {% if election.start_of_candidate_selection and election.end_of_candidate_selection %}
+                        <div class="election-dates">
+                            <h4>Candidate Selection</h4>
+                            <p>
+                                <strong>Starts:</strong>
+                                <span class="candidate-selection-start">
+                                    {{ election.start_of_candidate_selection }}
+                                </span>
+                            </p>
+                            <p>
+                                <strong>Ends:</strong>
+                                <span class="candidate-selection-end">
+                                    {{ election.end_of_candidate_selection }}
+                                </span>
+                            </p>
+                        </div>
+                    {% endif $}
+
+                    <div class="election-dates">
+                        <h4>Election Period</h4>
+                        <p>
+                            <strong>Starts:</strong>
+                            <span class="election-start">{{ election.start_of_election }}</span>
+                        </p>
+                        <p>
+                            <strong>Ends:</strong>
+                            <span class="election-end">{{ election.end_of_election }}</span>
+                        </p>
+                    </div>
+                    <div class="election-meta">
+                        <p>
+                            <strong>Key:</strong>
+                            <span class="election-key">{{ election.key }}</span>
+                        </p>
+                        <p>
+                            <strong>Creator's Name:</strong>
+                            <span class="election-creator-id">{{ election.user_id }}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div style="color: #fff; display: flex; justify-content: center">
+            <h1">No Elections Found</h1>
+        </div>
+    {% endif %}
+{% endblock %}
